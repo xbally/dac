@@ -37,6 +37,28 @@ CREATE TABLE tb_paciente (
     /*CONSTRAINT fk_paciente_plano FOREIGN KEY (id_plano) REFERENCES tb_plano_saude(id_plano)*/ 
 );
 
+CREATE TABLE tb_habito(
+    id_habito SERIAL PRIMARY KEY,
+    nome_habito VARCHAR(100),
+    descricao_habito TEXT,
+    id_paciente INT,
+    CONSTRAINT fk_habito_paciente FOREIGN KEY (id_paciente) REFERENCES tb_paciente
+);
+
+CREATE TABLE tb_doenca(
+    id_doenca SERIAL PRIMARY KEY,
+    nome_doença VARCHAR(100),
+    descricao_doenca TEXT,
+    id_paciente INT,
+    CONSTRAINT fk_doenca_paciente FOREIGN KEY (id_paciente) REFERENCES tb_paciente
+);
+
+CREATE TABLE tb_consulta_paciente(
+    id_paciente INT,
+    id_consulta INT,
+    CONSTRAINT fk_cp_paciente FOREIGN KEY (id_paciente) REFERENCES tb_paciente
+);
+
 /*********************SISTEMA 2****************************/
 
 CREATE TABLE tb_especialidade (
@@ -85,9 +107,50 @@ CREATE tb_medico_plano (
 
 CREATE tb_agenda (
     id_agenda SERIAL PRIMARY KEY,
-    
+    mês_agenda INT
 )
 
+CREATE tb_consulta (
+    id_consulta SERIAL PRIMARY KEY,
+    data_hora_consulta TIMESTAMP,
+    id_medico INT,
+    id_paciente INT,
+    receita_consulta TEXT,
+    id_tipo INT,
+    id_status INT,
+    
+);
+
+CREATE tb_exame (
+    id_exame SERIAL PRIMARY KEY,
+    nome_exame VARCHAR(100),
+    id_consulta INT,
+    CONSTRAINT fk_exame_consulta FOREIGN KEY (id_consulta) REFERENCES tb_consulta(id_consulta)
+)
+
+CREATE tb_cirurgia (
+    id_cirurgia SERIAL PRIMARY KEY,
+    nome_cirurgia VARCHAR(100),
+    tempo_cirurgia 
+);
+
+CREATE tb_lista_espera (
+    id_consulta INT,
+    id_pessoa INT,
+    CONSTRAINT fk_le_consulta FOREIGN KEY (id_consulta) REFERENCES tb_consulta(id_consulta),
+    CONSTRAINT fk_le_pessoa FOREIGN KEY (id_pessoa) REFERENCES tb_pessoa(id_pessoa)
+);
+
+CREATE tb_tipo_consulta (
+    id_tipo SERIAL PRIMARY KEY,
+    nome_tipo VARCHAR(25)
+);
+
+
+CREATE tb_status (
+    id_status SERIAL PRIMARY KEY,
+    nome_status VARCHAR(25)
+);
 /*CREATE TABLE tb_usuario (
     id_usuario SERIAL PRIMARY KEY,
     login_usuario VARCHAR(50),
