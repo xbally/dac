@@ -1,0 +1,153 @@
+
+
+
+public class MedicoDAO {
+
+       private Connection conn = null;
+
+    
+
+    public MedicoDAO(){
+
+        conn = ConnectionFactory.getConnection();
+
+    }
+
+	
+//INSERT
+
+	public void inserir(Medico dados){
+
+		String sql = " INSERT INTO tb_medico      ( nome_medico,    telefone_medico ,    cpf_medico ,    rg_medico ,    email_medico,    senha_medico ,    nascimento_medico ,
+    crm_medico ,    sexo_medico,    cep_medico ,    logradouro_medico ,    num_logradouro_medico ,    complemento_medico ,   bairro_medico ,    cidade_medico ,    uf_medico) VALUES ( (?), (?), (?), (?), (?), (?), (?), (?), (?), (?),
+																																																	(?), (?), (?), (?), (?), (?))";
+
+		        PreparedStatement stmt = null;
+
+					try{
+
+					stmt = conn.prepareStatement(sql);
+
+					stmt.setString(1, dados.getNome_medico());
+
+					stmt.setString(2, dados.getTelefone_medico());
+					
+					stmt.setString(3, dados.getCpf_medico());
+
+					stmt.setString(4, dados.getRg_medico());
+					
+					stmt.setString(5, dados.getEmail_medico());
+					
+					stmt.setString(6, dados.getSenha_medico());
+					
+					stmt.setDate(7, dados.getNascimento_medico());
+					
+					stmt.setString(8, dados.getCrm_medico());
+					
+					stmt.setString(9, dados.getSexo_medico());
+					
+					stmt.setString(10, dados.getCep_medico());
+					
+					stmt.setString(11, dados.getLogradouro_medico());
+					
+					stmt.setInt(12, dados.getNum_logradouro_medico());
+					
+					stmt.setString(13, dados.getComplemento_medico());
+					
+					stmt.setString(14, dados.getBairro_medico());
+					
+					stmt.setString(15, dados.getCidade_medico());
+					
+					stmt.setString(16, dados.getUf_medico());
+					
+				
+					stmt.executeQuery();
+
+				} catch (SQLException ex) {
+
+            Logger.getLogger(MedicoDAO.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+	}
+
+	
+	public void inserir2(Medico Agenda){
+		String sql = " INSERT INTO  tb_agenda (mês_agenda) VALUES ((?))";
+
+			PreparedStatement stmt = null;
+			
+			try{
+			
+				stmt = conn.prepareStatement(sql);
+				stmt.setInt(1, Agenda.getMês_agenda());
+				stmt.executeQuery();
+				} catch (SQLException ex) {
+
+            Logger.getLogger(MedicoDAO.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+			
+	}	
+
+		
+		public void inserir3(Medico Consulta){
+		String sql = " INSERT INTO  tb_consulta (   data_hora_consulta ,   receita_consulta ) VALUES ((?), (?))";
+
+			PreparedStatement stmt = null;
+			
+			try{
+			
+				stmt = conn.prepareStatement(sql);
+				stmt.setTime(1, Consulta.getData_hora_consulta());
+				stmt.setString(2, Consulta.getreceita_consulta());
+				stmt.executeQuery();
+				} catch (SQLException ex) {
+
+            Logger.getLogger(MedicoDAO.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+			
+	}	
+	
+	
+		
+		public void inserir4(Medico Exame){
+		String sql = " INSERT INTO  tb_exame (   nome_exame ) VALUES  ((?))";
+
+			PreparedStatement stmt = null;
+			
+			try{
+			
+				stmt = conn.prepareStatement(sql);
+				stmt.setString(1, Exame.getNome_exame());
+				stmt.executeQuery();
+				} catch (SQLException ex) {
+
+            Logger.getLogger(MedicoDAO.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+			
+	}	
+	
+	
+		
+		public void inserir5(Medico Cirurgia){
+		String sql = " INSERT INTO  tb_cirurgia (   nome_cirurgia ,   tempo_cirurgia ) VALUES ((?), (?))";
+
+			PreparedStatement stmt = null;
+			
+			try{
+			
+				stmt = conn.prepareStatement(sql);
+				stmt.setTime(1, Cirurgia.getTempo_Cirurgia());
+				stmt.setString(2, Cirurgia.getNome_Cirurgia());
+				stmt.executeQuery();
+				} catch (SQLException ex) {
+
+            Logger.getLogger(MedicoDAO.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+			
+	}	
+	
