@@ -1,0 +1,77 @@
+
+public class PacienteDAO {
+       private Connection conn = null;
+    
+    public PacienteDAO(){
+        conn = ConnectionFactory.getConnection();
+    }
+
+
+//INSERT 
+
+    public void inserir(Paciente paciente){
+        String sql = "INSERT INTO tb_paciente ( nome_paciente , telefone_paciente, cpf_paciente, rg_paciente, 
+    email_paciente , senha_paciente, pai_paciente, mae_paciente,  nascimento_paciente,  id_plano ,  num_carteirinha_paciente,
+    sexo_paciente , cep_paciente, logradouro_paciente,  num_logradouro_paciente, complemento_paciente , bairro_paciente, cidade_paciente, 
+    uf_paciente ) VALUES ((?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?), (?))";
+        PreparedStatement stmt = null;
+        try{
+            stmt = conn.prepareStatement(sql);   
+            stmt.setString(1, paciente.getNome_paciente());
+            stmt.setString(2, paciente.getTelefone_paciente());
+            stmt.setString(3, paciente.getCPF_Paciente());
+            stmt.setString(4, paciente.getRG_Paciente());
+            stmt.setString(5, paciente.getEmail_paciente());
+		    stmt.setString(6, paciente.getSenha_paciente());
+			stmt.setString(7, paciente.getPai_paciente());
+			stmt.setString(8, paciente.getMae_paciente());
+			stmt.setDate(9, paciente.getNascimento_paciente());
+		**	stmt.setInt(10, paciente.getId_plano());
+		**	stmt.setString(11, paciente.getNum_carteirinha_paciente());
+			stmt.setString(12, paciente.getSexo_paciente());
+			stmt.setString(13, paciente.getCep_paciente());
+			stmt.setString(14, paciente.getLogradouro_paciente());
+			stmt.setInt(15, paciente.getNum_logradouro_paciente());
+			stmt.setString(16, paciente.getComplemento_paciente());
+			stmt.setString(17, paciente.getBairro_paciente());
+			stmt.setString(18, paciente.getCidade_paciente());
+			stmt.setString(19, paciente.getUf_paciente());
+
+		   stmt.executeQuery();
+             
+        } catch (SQLException ex) {
+            Logger.getLogger(PacienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+	
+	
+	public void inserir2(Paciente habito){
+		String sql = " INSERT INTO tb_habito nome_habito,descricao_habito VALUES ( (?), (?))";
+		        PreparedStatement stmt = null;
+					try{
+					stmt = conn.prepareStatement(sql);
+					stmt.setString(1, habito.getNome_habito());
+					stmt.setString(2, habito.getDescricao_habito());
+					   stmt.executeQuery();
+				} catch (SQLException ex) {
+            Logger.getLogger(PacienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+	}
+	
+	
+		public void inserir3(Paciente doenca){
+		String sql = " INSERT INTO  tb_doenca nome_doença ,descricao_doenca ,VALUES ( (?), (?))";
+		        PreparedStatement stmt = null;
+					try{
+					stmt = conn.prepareStatement(sql);
+					stmt.setString(1, doenca.getNome_doença());
+					stmt.setString(2, doenca.getDescricao_doenca());
+					   stmt.executeQuery();
+				} catch (SQLException ex) {
+            Logger.getLogger(PacienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+	}
+	
+	
+	
+    
